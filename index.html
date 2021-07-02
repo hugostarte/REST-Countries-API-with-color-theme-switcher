@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="CSS.css" rel="stylesheet" type="text/css">
+  <title>REST Countries API with color theme switcher</title>
+  <script type="text/javascript" src="javascript.js"></script>
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+</head>
+
+  <body>
+    <nav class="top">
+      <h1>Where in the world?</h1>
+    </nav>
+
+    <div class="search">
+      <img src="loupe.png">
+      <input type="text" id="search" name="search" placeholder="Search for a country...">
+    
+      <select name="select" size="1"id="select" onchange="change_valeur();">
+        <option value="All" selected="selected" >Filter by Region</option>
+        <option value="Europe">Europe</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">America</option>
+        <option value="Asia">Asia</option>
+        <option value="Oceania">Oceania</option>
+      </select>
+    </div>
+    <div id="result">
+      
+    </div>
+    <script>
+      var valeur_cherchee = "";
+      function change_valeur() {
+        select = document.getElementById("select");
+        choice = select.selectedIndex;
+        valeur_cherchee = select.options[choice].value; 
+        if (valeur_cherchee == "All") {
+          $.ajax({
+            url: "https://restcountries.eu/rest/v2/all",
+            type: "get",
+            success: function(data){
+              var rs = "";
+              for(i in data){
+                  rs += "<div class='card'>";
+                  rs += "<img src='"+data[i].flag+"'>";
+                  rs += "<div class='card_content'>";
+                  rs += "<h2>"+data[i].name+"</h2>";
+                  rs += "<h4> Population: "+data[i].population+"</h4>";
+                  rs += "<h4> Region: "+data[i].region+"</h4>";
+                  rs += "<h4> Capital: "+data[i].capital+"</h4>";
+                  rs += "</div></div>";
+                }
+            document.getElementById('result').innerHTML = rs;
+            }
+          })
+
+        } else { 
+          $.ajax({
+            url: "https://restcountries.eu/rest/v2/all",
+            type: "get",
+            success: function(data){
+              var rs = "";
+              for(i in data){
+                if(data[i].region == valeur_cherchee){
+                  rs += "<div class='card'>";
+                  rs += "<img src='"+data[i].flag+"'>";
+                  rs += "<div class='card_content'>";
+                  rs += "<h2>"+data[i].name+"</h2>";
+                  rs += "<h4> Population: "+data[i].population+"</h4>";
+                  rs += "<h4> Region: "+data[i].region+"</h4>";
+                  rs += "<h4> Capital: "+data[i].capital+"</h4>";
+                  rs += "</div></div>";
+                }
+              }
+              document.getElementById('result').innerHTML = rs;
+            }
+          })
+        }
+      }
+
+      $.ajax({
+        url: "https://restcountries.eu/rest/v2/all",
+        type: "get",
+        success: function(data){
+          var rs = "";
+          for(i in data){
+            rs += "<div class='card' >";
+            rs += "<img src='"+data[i].flag+"'>";
+            rs += "<div class='card_content'>";
+            rs += "<h2>"+data[i].name+"</h2>";
+            rs += "<h4> Population: "+data[i].population+"</h4>";
+            rs += "<h4> Region: "+data[i].region+"</h4>";
+            rs += "<h4> Capital: "+data[i].capital+"</h4>";
+            rs += "</div></div>";
+            
+          }
+
+        document.getElementById('result').innerHTML = rs;
+        }
+      })
+
+      $('#search').on('input',function(e){
+        var val = $(this).val();
+        $.ajax({
+          url: "https://restcountries.eu/rest/v2/all",
+          type: "get",
+          success: function(data){
+            var rs = "";
+            for(i in data){
+              if (data[i].name.includes(val) || data[i].name.toUpperCase() == val.toUpperCase() || data[i].name.toUpperCase().includes(val.toUpperCase()) ) {
+                rs += "<div class='card'>";
+                rs += "<img src='"+data[i].flag+"'>";
+                rs += "<div class='card_content'>";
+                rs += "<h2>"+data[i].name+"</h2>";
+                rs += "<h4> Population: "+data[i].population+"</h4>";
+                rs += "<h4> Region: "+data[i].region+"</h4>";
+                rs += "<h4> Capital: "+data[i].capital+"</h4>";
+                rs += "</div></div>";
+              }
+            }
+          document.getElementById('result').innerHTML = rs;
+          }
+        });
+      });
+
+  </script>
+  </body>
+  
+</html>

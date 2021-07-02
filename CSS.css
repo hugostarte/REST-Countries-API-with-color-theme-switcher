@@ -1,0 +1,90 @@
+:root {
+    --Dark_Blue_email : hsl(217, 28%, 15%);
+    --Dark_Blue: hsl(218, 28%, 13%);
+    --Dark_Blue_footer: hsl(216, 53%, 9%);
+    --Dark_blue_testimonials: hsl(219, 30%, 18%);
+    --Cyan: hsl(176, 68%, 64%);
+	--Blue: hsl(198, 60%, 50%);
+	--Light_Red_error: hsl(0, 100%, 63%);
+}
+body{
+	margin:0;
+	padding:0;
+	width: 100%;
+	font-family: 'Raleway', sans-serif;
+}
+.top{
+	height: 10vw;
+	width: 100%;
+	display:flex;
+	align-items: center;
+	margin-bottom: 40px;
+	box-shadow: 0px 2px 8px -6px rgba(0, 0, 0, 0.75);
+}
+.top h1{
+	margin-left: 50px;
+}
+#result{
+	width: 90%;
+	margin:auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-top: 40px;
+}
+.card{
+	width: 280px;
+	height: 420px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 40px;
+	box-shadow: 0px 1px 40px 1px rgba(0, 0, 0, 0.1);
+}
+.card img{
+	width: 280px;
+    height: 180px;
+    object-fit: cover;
+}
+.card_content{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+.search{
+	position: relative;
+	width: 85%;
+	margin:auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.search img{
+	position: absolute;
+	top: 30%;
+	height: 30%;
+	left: 30px;
+	display:flex;
+	align-items: center;
+}
+.search input{
+	text-indent: 70px;
+	font-size: 1.2em;
+	width: 40vw;
+	height: 60px;
+	box-shadow: 0px 1px 40px 1px rgba(0, 0, 0, 0.1);
+}
+.search select, .search select option{
+	margin-left: 40%;
+	width: 12%;
+	height: 60px;
+	font-size: 1.2em;
+}
+
+.icon{
+	position: absolute;
+	top: 60%;
+	left: 4%;
+	width: 10px;
+	background-image: url("loupe.png");
+}
+
+
